@@ -1,0 +1,35 @@
+import WendigoModule from '../wendigo_module';
+import { OpenSettings, FinalBrowserSettings } from '../../types';
+import RequestFilter from './request_filter';
+import Browser from '../../browser/browser';
+import RequestMock from './request_mock';
+import { Request } from '../../puppeteer_wrapper/puppeteer_types';
+import { RequestMockOptions } from './types';
+export default class BrowserRequests extends WendigoModule {
+    private _requestMocker;
+    private _requests;
+    private _interceptorReady;
+    private _interceptorCallback?;
+    private _responseInterceptorCallback?;
+    private _settings;
+    constructor(browser: Browser, settings: FinalBrowserSettings);
+    get filter(): RequestFilter;
+    all(): Array<Request>;
+    getAllMocks(): Array<RequestMock>;
+    mock(url: string | RegExp, options: RequestMockOptions): RequestMock;
+    removeMock(url: string, options: RequestMockOptions): void;
+    clearRequests(): void;
+    clearMocks(): void;
+    setHeaders(headers: Record<string, string>): Promise<void>;
+    waitForNextRequest(url: string | RegExp, timeout?: number): Promise<void>;
+    waitForNextResponse(url: string | RegExp, timeout?: number): Promise<void>;
+    waitForRequest(url: string, timeout?: number): Promise<void>;
+    waitForResponse(url: string, timeout?: number): Promise<void>;
+    protected _beforeOpen(options: OpenSettings): Promise<void>;
+    protected _beforeClose(): Promise<void>;
+    private _startRequestInterceptor;
+    private _startResponseLogInterceptor;
+    private _closeRequestInterceptor;
+    private _waitForRequestEvent;
+    private _getTimeout;
+}

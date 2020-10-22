@@ -1,0 +1,47 @@
+/// <reference types="node" />
+import { Page, Frame, EvaluateFn, SerializableOrJSHandle, JSHandle, Response, Worker, ScriptTagOptions, Browser, Base64ScreenShotOptions, Keyboard, Mouse, NavigationOptions, WaitForSelectorOptions, ElementHandle, Touchscreen, Cookie, SetCookie, DeleteCookie, PageEventObj, PDFOptions, GeoOptions, MediaType, MediaFeature } from './puppeteer_types';
+import { ViewportOptions } from './puppeteer_types';
+export default class PuppeteerPage {
+    page: Page;
+    constructor(page: Page);
+    get keyboard(): Keyboard;
+    get mouse(): Mouse;
+    get touchscreen(): Touchscreen;
+    goto(url: string): Promise<Response | null>;
+    browser(): Browser;
+    frames(): Array<Frame>;
+    close(): Promise<void>;
+    isClosed(): boolean;
+    setViewport(config?: ViewportOptions): Promise<void>;
+    on<K extends keyof PageEventObj>(eventName: K, cb: (msg: PageEventObj[K]) => void): void;
+    off<K extends keyof PageEventObj>(eventName: K, cb: (msg: PageEventObj[K]) => void): void;
+    evaluateHandle(cb: string | ((...args: any[]) => any), ...args: Array<SerializableOrJSHandle>): Promise<JSHandle>;
+    addScriptTag(options: ScriptTagOptions): Promise<void>;
+    setUserAgent(userAgent: string): Promise<void>;
+    setBypassCSP(value: boolean): Promise<void>;
+    content(): Promise<string>;
+    screenshot(args?: Base64ScreenShotOptions): Promise<string | Buffer>;
+    select(cssPath: string, ...values: Array<string>): Promise<Array<string>>;
+    title(): Promise<string>;
+    goBack(): Promise<void>;
+    goForward(): Promise<void>;
+    reload(): Promise<void>;
+    waitForNavigation(options?: NavigationOptions): Promise<void>;
+    waitFor(selector: string | EvaluateFn, options?: WaitForSelectorOptions, ...args: Array<SerializableOrJSHandle>): Promise<void>;
+    $(selector: string): Promise<ElementHandle<Element> | null>;
+    $x(selector: string): Promise<Array<ElementHandle<Element>>>;
+    $$(selector: string): Promise<Array<ElementHandle<Element>>>;
+    cookies(...urls: Array<string>): Promise<Array<Cookie>>;
+    setCookie(...cookies: Array<SetCookie>): Promise<void>;
+    deleteCookie(...cookies: Array<DeleteCookie>): Promise<void>;
+    workers(): Array<Worker>;
+    setRequestInterception(b: boolean): Promise<void>;
+    pdf(options?: PDFOptions): Promise<Buffer>;
+    setCache(value: boolean): Promise<void>;
+    setExtraHTTPHeaders(headers: Record<string, string>): Promise<void>;
+    setContent(html: string): Promise<void>;
+    emulateTimezone(tz?: string): Promise<void>;
+    setGeolocation(geolocation: GeoOptions): Promise<void>;
+    emulateMediaType(mediaType: MediaType): Promise<void>;
+    emulateMediaFeatures(mediaFeatures: Array<MediaFeature>): Promise<void>;
+}

@@ -1,0 +1,30 @@
+import { WendigoSelector } from '../../types';
+import BrowserInterface from '../browser_interface';
+export default class AssertionsCore {
+    protected _browser: BrowserInterface;
+    constructor(browser: BrowserInterface);
+    exists(selector: WendigoSelector, msg?: string): Promise<void>;
+    visible(selector: WendigoSelector, msg?: string): Promise<void>;
+    tag(selector: WendigoSelector, expected: string, msg?: string): Promise<void>;
+    text(selector: WendigoSelector, expected: string | RegExp | Array<string | RegExp>, msg?: string): Promise<void>;
+    textContains(selector: WendigoSelector, expected: string | Array<string>, msg?: string): Promise<void>;
+    title(expected: string | RegExp, msg?: string): Promise<void>;
+    class(selector: WendigoSelector, expected: string, msg?: string): Promise<void>;
+    url(expected: string | RegExp, msg?: string): Promise<void>;
+    value(selector: WendigoSelector, expected: string | null, msg?: string): Promise<void>;
+    element(selector: WendigoSelector, msg?: string): Promise<void>;
+    elements(selector: WendigoSelector, count: number, msg?: string): Promise<void>;
+    attribute(selector: WendigoSelector, attribute: string, expectedValue?: string | null, msg?: string): Promise<void>;
+    style(selector: WendigoSelector, style: string, expected: string, msg?: string): Promise<void>;
+    href(selector: WendigoSelector, expected: string, msg?: string): Promise<void>;
+    innerHtml(selector: WendigoSelector, expected: string | RegExp, msg?: string): Promise<void>;
+    elementHtml(selector: WendigoSelector, expected: string | RegExp, msg?: string): Promise<void>;
+    options(selector: WendigoSelector, expected: string | Array<string>, msg?: string): Promise<void>;
+    selectedOptions(selector: WendigoSelector, expected: string | Array<string>, msg?: string): Promise<void>;
+    global(key: string, expected?: any, msg?: string): Promise<void>;
+    checked(selector: WendigoSelector, msg?: string): Promise<void>;
+    disabled(selector: WendigoSelector, msg?: string): Promise<void>;
+    enabled(selector: WendigoSelector, msg?: string): Promise<void>;
+    focus(selector: WendigoSelector, msg?: string): Promise<void>;
+    redirect(msg?: string): Promise<void>;
+}

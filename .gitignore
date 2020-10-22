@@ -59,5 +59,4 @@ typings/
 
 ncp/
 .DS_Store
-dist/
 package-lock.json
